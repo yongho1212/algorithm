@@ -113,3 +113,43 @@ print(a)
 # 특정 값을 갖는 원소 삭제
 a.remove(3)
 print(a)
+
+print(1 in a)
+# True
+print(11 not in a)
+# True
+
+score = 85
+if score >= 80:
+    pass
+    print('over 80')
+else :
+    print('under 80')
+
+if score >= 80:result="success"
+else: result="fail"
+
+result= 'suc' if score >=80 else 'fail'
+
+# 3항연산자 다시보기 -------------
+result= score >= 80 and 'suc' or 'fail'
+print(result,"3")
+
+# 여기도 이해하고 넘어가기... 다시 보기
+p = [1,2,3,4,5,5,5]
+remove_set = {3,5}
+print(p)
+result = []
+for i in p:
+    if i not in remove_set:
+        result.append(i)
+print(result, '1')
+result = [i for i in p if i not in remove_set]
+print(result, "result")
+
+j = 0
+result = 0
+while j < 9:
+    result += i
+    j += 1
+print(result)
