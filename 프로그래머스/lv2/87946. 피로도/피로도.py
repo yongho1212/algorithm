@@ -1,21 +1,22 @@
 from itertools import permutations
+
 def solution(k, dungeons):
-	# 던전의 번호: 0, 1, 2
-    idx = [i for i in range(len(dungeons))]
-    # 던전의 개수
-    cnt = len(dungeons)
-    
-    # 최대 던전의 수에서 1씩 줄여간다: 3,2,1
-    for i in range(cnt,0,-1):
-    	# i개일 때의 던전의 순열을 구한다.
-        for order in permutations(idx,i):
-            now = k
-            check = True
-            for o in order:
-                if dungeons[o][0] > now:
-                    check = False
-                    break
-                else: 
-                    now -= dungeons[o][1]
-            if check:
-                return i
+    ans = 0
+
+    # 모든 던전 순열에 대해 탐색
+    for dungeon_perm in permutations(dungeons, len(dungeons)):
+        hp = k
+        count = 0
+
+        # 순열의 각 던전을 방문하며 체력을 소모함
+        for dungeon in dungeon_perm:
+            if hp >= dungeon[0]:
+                hp -= dungeon[1]
+                count += 1
+            else:
+                break
+
+        # 최대 클리어한 던전 수를 저장함
+        ans = max(ans, count)
+
+    return ans
