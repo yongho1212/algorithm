@@ -1,22 +1,22 @@
 function solution(k, dungeons) {
-    let maxCount = 0;
-    
-    const dfs = (fatigue, count, visited) => {
-        let isEnd = true;
-        for (let i = 0; i < dungeons.length; i++) {
-            if (visited[i] || dungeons[i][0] > fatigue) {
-                continue;
-            }
-            isEnd = false;
-            visited[i] = true;
-            dfs(fatigue - dungeons[i][1], count + 1, visited);
-            visited[i] = false;
-        }
-        if (isEnd) {
-            maxCount = Math.max(maxCount, count);
-        }
-    };
-    
-    dfs(k, 0, Array(dungeons.length).fill(false));
-    return maxCount;
+  let visited = Array(dungeons.length).fill(false);
+  let ans = 0;
+
+  let dfs = (hp, count, visited) => {
+    ans = Math.max(ans, count); // 현재 count와 ans 중 최대 값을 ans에 저장합니다.
+
+    for (let i = 0; i < dungeons.length; i++) {
+      if (visited[i] || dungeons[i][0] > hp) {
+        continue;
+      }
+
+      visited[i] = true;
+      dfs(hp - dungeons[i][1], count + 1, visited);
+      visited[i] = false;
+    }
+  };
+
+  dfs(k, 0, visited); // 초기 호출
+
+  return ans; // 계산된 정답 반환
 }
